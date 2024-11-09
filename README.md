@@ -13,4 +13,6 @@ Update PATH:
 
 echo 'export PATH=$PATH:$HOME/go/bin' >> ~/.bashrc
 source ~/.bashrc
+
+go install package (goes to ~/go/bin/)
 ```
