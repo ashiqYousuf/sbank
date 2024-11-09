@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+// Here we will define the RPC defn of our APIs
+
+package pb;
+
+import "rpc_create_user.proto";
+import "rpc_login_user.proto";
+
+option go_package = "github.com/ashiqYousuf/sbank/pb";
+
+service SimpleBank {
+    // gRPC API to create a new user
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
+    // gRPC API to login a user
+    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {}
+}
