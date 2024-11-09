@@ -7,7 +7,7 @@ import "time"
 // Implies we can easily switch b/w our JWT & PASETO tokens
 type Maker interface {
 	// creates a new token for a specific username & duration
-	CreateToken(username string, duration time.Duration) (string, error)
+	CreateToken(username string, duration time.Duration) (string, *Payload, error)
 
 	// checks if the token is valid or not
 	VerifyToken(token string) (*Payload, error)
