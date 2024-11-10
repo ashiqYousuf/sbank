@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+// Here we will define the RPC defn of our APIs
+
+package pb;
+
+import "google/api/annotations.proto";
+import "rpc_create_user.proto";
+import "rpc_update_user.proto";
+import "rpc_login_user.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/ashiqYousuf/sbank/pb";
+
+/*
+What is gRPC-Gateway?
+    gRPC-Gateway is a plugin that allows you to serve both
+    gRPC and HTTP Requests simultaneously. 
+    (Ex for HTTP Request)
+    It acts as a reverse proxy, converting HTTP/JSON 
+    requests into gRPC calls and then converting the 
+    responses back to HTTP/JSON.
+*/
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "Simple Bank API";
+        version: "1.2";
+        contact: {
+            name: "Tech School";
+            url: "https://github.com/ashiqYousuf";
+            email: "dummy@gmail.com";
+        };
+    };
+};
+
+service SimpleBank {
+    // gRPC API to create a new user
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
+        /*
+            1 This part integrates the gRPC-Gateway.
+            2 When HTTP POST request is made to /v1/create_user it will
+            be converted into a gRPC call to the CreateUser method
+            3 body: "*" it maps JSON body to the CreateUserRequest
+        */
+        option (google.api.http) = {
+            post: "/v1/create_user"
+            body: "*"
+        };
+    }
+
+    // gRPC API to update a user
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            patch: "/v1/update_user"
+            body: "*"
+        };
+    }
+
+    // gRPC API to login a user
+    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/login_user"
+            body: "*"
+       };
+    }
+}

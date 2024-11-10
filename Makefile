@@ -22,4 +22,18 @@ test:
 server:
 	go run main.go
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server
+# Generate grpc and grpc gateway code
+proto:
+	rm -f pb/*.go
+	rm -rf doc/swagger/*.swagger.json
+	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative --experimental_allow_proto3_optional \
+    --go-grpc_out=pb --go-grpc_opt=paths=source_relative \
+	--grpc-gateway_out=pb --grpc-gateway_opt paths=source_relative \
+	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=simple_bank \
+    proto/*.proto
+	statik -src=./doc/swagger -dest=./doc
+
+evans:
+	evans --host localhost --port 9090 -r repl
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test server proto

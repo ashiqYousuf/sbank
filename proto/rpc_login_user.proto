@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+// Here we will define Request and Response
+// data structure of the LoginUser API
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+import "user.proto";
+
+option go_package = "github.com/ashiqYousuf/sbank/pb";
+
+message LoginUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginUserResponse {
+    User user = 1;
+    string session_id = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    google.protobuf.Timestamp access_token_expires_at = 5;
+    google.protobuf.Timestamp refresh_token_expires_at = 6;
+}

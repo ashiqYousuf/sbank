@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// Here we will define Request and Response
+// data structure of the CreateUser API
+
+package pb;
+
+import "user.proto";
+
+option go_package = "github.com/ashiqYousuf/sbank/pb";
+
+// Request object that contains the data to create a new user
+message CreateUserRequest {
+    string username = 1;
+    string full_name = 2;
+    string email = 3;
+    string password = 4;
+}
+
+// Response when creating new user
+message CreateUserResponse {
+    User user = 1;
+}
