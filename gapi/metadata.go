@@ -2,7 +2,6 @@ package gapi
 
 import (
 	"context"
-	"log"
 
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
@@ -26,7 +25,7 @@ func (server *Server) extractMetaData(ctx context.Context) *Metadata {
 		// id metadata is successfully retrieved or not
 		// md is a map where key is a string and value is
 		// array of strings
-		log.Printf("md: %+v\n", md)
+		// log.Printf("md: %+v\n", md)
 		// For HTTP Clients
 		if userAgents := md.Get(grpcGatewayUserAgentHeader); len(userAgents) > 0 {
 			mtdt.UserAgent = userAgents[0]
