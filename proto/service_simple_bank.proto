@@ -6,6 +6,7 @@ package pb;
 
 import "google/api/annotations.proto";
 import "rpc_create_user.proto";
+import "rpc_update_user.proto";
 import "rpc_login_user.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -44,6 +45,14 @@ service SimpleBank {
         */
         option (google.api.http) = {
             post: "/v1/create_user"
+            body: "*"
+        };
+    }
+
+    // gRPC API to update a user
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            patch: "/v1/update_user"
             body: "*"
         };
     }
