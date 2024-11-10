@@ -142,7 +142,8 @@ func runGatewayServer(config util.Config, store db.Store) {
 	}
 
 	log.Info().Msgf("start HTTP gateway server at %s", listener.Addr().String())
-	_ = http.Serve(listener, mux) // start gRPC server
+	handler := gapi.HttpLogger(mux)
+	_ = http.Serve(listener, handler) // start gRPC server
 	log.Fatal().Msg("cannot start HTTP gateway server")
 }
 
