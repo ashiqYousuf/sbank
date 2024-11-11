@@ -17,4 +17,4 @@ source ~/.bashrc
 go install package (goes to ~/go/bin/)
 ```
 
-Note:- gRPC interceptor is a function that gets called for every request before its sent to the gRPC handler.
+Note:- gRPC interceptor is a function that gets called for every request before its sent to the gRPC handler (Doesn't work for HTTP Requests, need to seperately add that for gRPC Gateway)
