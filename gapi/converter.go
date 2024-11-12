@@ -6,6 +6,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+// Takes database user as input and returns the pb User struct (filter passwords)
 func convertUser(user db.User) *pb.User {
 	return &pb.User{
 		Username:          user.Username,
